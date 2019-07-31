@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -83,7 +84,7 @@ public class GameController : MonoBehaviour
 
     public void returnToMainMenu()
     {
-        Debug.Log("Main Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     IEnumerator spawnAsteroids()
