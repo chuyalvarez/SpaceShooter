@@ -26,10 +26,10 @@ public class Missile : MonoBehaviour
         }
         else if(other.tag== "Asteroid")
         {
+            int asteroidValue = other.gameObject.GetComponent<Asteroid>().aValue;
             Destroy(other.gameObject);
+            PlayerPrefs.SetFloat("Score", PlayerPrefs.GetFloat("Score") + asteroidValue);
             Destroy(this.gameObject);
-            
-            PlayerPrefs.SetFloat("Score", PlayerPrefs.GetFloat("Score")+10);
 
         }
        

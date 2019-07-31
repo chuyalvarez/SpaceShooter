@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 503229377336868647}
   - component: {fileID: 2929383090938867592}
   m_Layer: 0
-  m_Name: Asteroid
+  m_Name: GoldAsteroid
   m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a420b0d54bef24f9ee4e2721ef860d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidSpeed: 3
-  aValue: 10
+  asteroidSpeed: 4
+  aValue: 30
 --- !u!54 &2929383090938867592
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 85f3f2ee337b7d74a9964076386bed02, type: 2}
+      objectReference: {fileID: 2100000, guid: 97c304820aab28c47ad3d26d8d3a8910, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f22843a673f47ba4780c228218f25416, type: 3}
 --- !u!4 &6165826438508780178 stripped

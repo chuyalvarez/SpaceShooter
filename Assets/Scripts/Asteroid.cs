@@ -6,6 +6,7 @@ public class Asteroid : MonoBehaviour
 {
     [SerializeField]
     private float asteroidSpeed = 5;
+    public int aValue;
     // Start is called before the first frame update
     void Start()
     {

@@ -5,25 +5,26 @@ using UnityEngine;
 public class ShipControls : MonoBehaviour
 {
     private float leftDivisor,rightDivisor,screenWidth;
+    private bool shooting,doubleAmmo;
     [SerializeField]
     private float speed = 10;
     [SerializeField]
     private GameObject ammo;
     [SerializeField]
     private GameObject gameController;
-    private bool shooting;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         screenWidth = Screen.width;
-        leftDivisor = screenWidth / 5 * 2;
-        rightDivisor = screenWidth / 5 * 3;
+        leftDivisor = screenWidth / 3 ;
+        rightDivisor = leftDivisor * 2;
 
     }
 
 // Update is called once per frame
-void Update()
+    void Update()
     {
         if (Input.GetMouseButton(0))
         {
@@ -56,11 +57,31 @@ void Update()
         gameController.GetComponent<GameController>().loseLife();
     }
 
+    public void addPower()
+    {
+        StartCoroutine(doubleFire());
+    }
+
     IEnumerator shoot()
     {
         shooting = true;
-        Instantiate(ammo, transform.position, Quaternion.identity);
+        if (doubleAmmo)
+        {
+            Instantiate(ammo, new Vector3(transform.position.x, transform.position.y, transform.position.z - 1), Quaternion.identity);
+            Instantiate(ammo, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(ammo, transform.position, Quaternion.identity);
+        }
         yield return new WaitForSeconds(0.8f);
         shooting = false;
+    }
+
+    IEnumerator doubleFire()
+    {
+        doubleAmmo = true;
+        yield return new WaitForSeconds(7f);
+        doubleAmmo = false;
     }
 }
