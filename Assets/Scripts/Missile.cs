@@ -6,6 +6,7 @@ public class Missile : MonoBehaviour
 {
     [SerializeField]
     private float bulletSpeed = 10;
+    private int asteroidValue;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,7 @@ public class Missile : MonoBehaviour
         }
         else if(other.tag== "Asteroid")
         {
-            int asteroidValue = other.gameObject.GetComponent<Asteroid>().aValue;
+            asteroidValue = other.gameObject.GetComponent<Asteroid>().aValue;
             Destroy(other.gameObject);
             PlayerPrefs.SetFloat("Score", PlayerPrefs.GetFloat("Score") + asteroidValue);
             Destroy(this.gameObject);

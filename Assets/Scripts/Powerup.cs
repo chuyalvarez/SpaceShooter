@@ -21,7 +21,7 @@ public class Powerup : MonoBehaviour
         if (other.tag == "Ship")
         {
 
-            other.gameObject.GetComponent<ShipControls>().addPower();
+            other.gameObject.GetComponent<Ship>().addPower();
             Destroy(this.gameObject);
         }
     }

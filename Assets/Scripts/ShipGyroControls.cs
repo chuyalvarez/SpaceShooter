@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipControls : MonoBehaviour,Ship
+public class ShipGyroControls : MonoBehaviour,Ship
 {
-    private float leftDivisor,rightDivisor,screenWidth;
     private bool shooting,doubleAmmo;
     [SerializeField]
     private float speed = 10;
@@ -17,33 +16,19 @@ public class ShipControls : MonoBehaviour,Ship
     // Start is called before the first frame update
     void Start()
     {
-        screenWidth = Screen.width;
-        leftDivisor = screenWidth / 3 ;
-        rightDivisor = leftDivisor * 2;
 
     }
 
 // Update is called once per frame
     void Update()
     {
+
+        if (Mathf.Abs(transform.position.z) < 4)
+        {
+            transform.Translate(new Vector3(0, 0, speed * Input.acceleration.z * Time.deltaTime));
+        }
         if (Input.GetMouseButton(0))
         {
-            if(Input.mousePosition.x>0 && Input.mousePosition.x < leftDivisor)
-            {
-                if (transform.position.z < 4)
-                {
-                    transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
-                }
-                
-            }
-            else if (Input.mousePosition.x > rightDivisor && Input.mousePosition.x < screenWidth)
-            {
-                if (transform.position.z > -4)
-                {
-                    transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
-                }
-            }
-
             if (!shooting)
             {
                 StartCoroutine(shoot());

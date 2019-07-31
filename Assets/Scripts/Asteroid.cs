@@ -28,7 +28,7 @@ public class Asteroid : MonoBehaviour
         else if (other.tag == "Ship")
         {
 
-            other.gameObject.GetComponent<ShipControls>().takeDamage();
+            other.gameObject.GetComponent<Ship>().takeDamage();
             Destroy(this.gameObject);
         }
     }
