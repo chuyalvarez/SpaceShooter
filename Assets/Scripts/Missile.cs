@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Torpedo : MonoBehaviour
+public class Missile : MonoBehaviour
 {
     [SerializeField]
     private float bulletSpeed = 10;
@@ -16,5 +16,19 @@ public class Torpedo : MonoBehaviour
     void Update()
     {
         transform.Translate(new Vector3(bulletSpeed*Time.deltaTime,0,0));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "GameBarrier")
+        {
+            Destroy(this.gameObject);
+        }
+        else if(other.tag== "Asteroid")
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+       
     }
 }
