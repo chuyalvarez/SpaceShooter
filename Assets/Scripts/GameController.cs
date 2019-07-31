@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour
     IEnumerator spawnAsteroids()
     {
         spawning = true;
-        Instantiate(asteroid,new Vector3(asteroidSpawnPoint.position.x, asteroidSpawnPoint.position.y , (Random.Range(-50,50)/10f) + asteroidSpawnPoint.position.z) ,Quaternion.identity);
+        Instantiate(asteroid,new Vector3(asteroidSpawnPoint.position.x, asteroidSpawnPoint.position.y , (Random.Range(-40f,40f)/10f) + asteroidSpawnPoint.position.z) ,Quaternion.identity);
         yield return new WaitForSeconds(3f);
         spawning = false;
     }
