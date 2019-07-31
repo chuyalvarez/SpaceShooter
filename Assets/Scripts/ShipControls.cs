@@ -9,14 +9,16 @@ public class ShipControls : MonoBehaviour
     private float speed = 10;
     [SerializeField]
     private GameObject ammo;
+    [SerializeField]
+    private GameObject gameController;
     private bool shooting;
 
     // Start is called before the first frame update
     void Start()
     {
         screenWidth = Screen.width;
-        leftDivisor = screenWidth / 3;
-        rightDivisor = leftDivisor * 2;
+        leftDivisor = screenWidth / 5 * 2;
+        rightDivisor = screenWidth / 5 * 3;
 
     }
 
@@ -27,11 +29,18 @@ void Update()
         {
             if(Input.mousePosition.x>0 && Input.mousePosition.x < leftDivisor)
             {
-                transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
+                if (transform.position.z < 4)
+                {
+                    transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
+                }
+                
             }
             else if (Input.mousePosition.x > rightDivisor && Input.mousePosition.x < screenWidth)
             {
-                transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
+                if (transform.position.z > -4)
+                {
+                    transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
+                }
             }
 
             if (!shooting)
@@ -40,6 +49,11 @@ void Update()
             }
         }
 
+    }
+
+    public void takeDamage()
+    {
+        gameController.GetComponent<GameController>().loseLife();
     }
 
     IEnumerator shoot()
