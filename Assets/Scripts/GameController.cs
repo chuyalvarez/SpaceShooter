@@ -9,23 +9,41 @@ public class GameController : MonoBehaviour
     private GameObject asteroid;
     [SerializeField]
     private Transform asteroidSpawnPoint;
-    private bool spawning;
+    private float hScore,totalScore;
+    private bool spawning,gameover;
     private int life = 3;
     [SerializeField]
     private Text lifeDisplay;
+    [SerializeField]
+    private Text scoreDisplay;
+    [SerializeField]
+    private Text gameoverText;
+    [SerializeField]
+    private Text highscoreText;
+    [SerializeField]
+    private Button mainMenu;
+    [SerializeField]
+    private GameObject ship;
+
     // Start is called before the first frame update
     void Start()
     {
         lifeDisplay.text = "Life: " + life + "/3";
+        PlayerPrefs.SetFloat("Score", 0);
+        mainMenu.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (!spawning)
+        if (!gameover)
         {
-            StartCoroutine(spawnAsteroids());
+            if (!spawning)
+            {
+                StartCoroutine(spawnAsteroids());
+            }
+
+            scoreDisplay.text = "Score: " + PlayerPrefs.GetFloat("Score");
         }
     }
 
@@ -33,6 +51,39 @@ public class GameController : MonoBehaviour
     {
         life--;
         lifeDisplay.text = "Life: " + life + "/3";
+        if (life <= 0)
+        {
+            endGame();
+        }
+    }
+
+
+    private void endGame()
+    {
+        ship.SetActive(false);
+        gameover = true;
+        gameoverText.text = "YOU LOSE!";
+        
+
+        hScore = PlayerPrefs.GetFloat("Highscore",0);
+        totalScore = PlayerPrefs.GetFloat("Score");
+        if (totalScore > hScore)
+        {
+            PlayerPrefs.SetFloat("Highscore",totalScore);
+            highscoreText.text = "New Highscore! " + totalScore;
+
+        }
+        else
+        {
+            highscoreText.text = "Highscore: "+hScore;
+        }
+        mainMenu.gameObject.SetActive(true);
+        
+    }
+
+    public void returnToMainMenu()
+    {
+        Debug.Log("Main Menu");
     }
 
     IEnumerator spawnAsteroids()

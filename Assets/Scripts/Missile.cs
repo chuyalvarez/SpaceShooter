@@ -28,6 +28,9 @@ public class Missile : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
+            
+            PlayerPrefs.SetFloat("Score", PlayerPrefs.GetFloat("Score")+10);
+
         }
        
     }
